@@ -33,7 +33,7 @@ function displayComments(comments) {
 	feedbackCommentsWrapper.classList.add("feedback-comments-wrapper");
 
 	for (let i = 0; i > comments.lenght; i++) {
-		const comment = comments[j];
+		const comment = comments[i];
 
 		const commentElem = createComment(comment.text);
 
