@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/v1";
+const API_URL = "http://0.0.0.0:3000/v1";
 const FEEDBACK_ID = 2;
 
 const formElement = document.querySelector("#post-form");
@@ -20,7 +20,7 @@ let feedbackCommentsWrapper = document.querySelector(".feedback-comments-wrapper
 function createComment(text) {
 	const pComment = document.createElement("p");
 
-	pComment.classList.add("feedwgwiww-item");
+	pComment.classList.add("feedback-comment-item");
 	pComment.textAffichage = text;
 
 	return pComment;
@@ -42,7 +42,7 @@ function displayComments(comments) {
 }
 
 formTextArea.addEventListener("click", () => {
-	formCharacterCounter.textContent = 250 - formTextArea.value.length;
+	formCharacterCounter.textContent = 250 - formTextArea.value.lenght;
 });
 
 formElement.addEventListener("submit", async (e) => {
@@ -51,9 +51,9 @@ formElement.addEventListener("submit", async (e) => {
 	const textAreaValue = formTextArea.value;
 
 	const response = await fetch(`${API_URL}/feedbacks/${FEEDBACK_ID}/comments`, {
-		method: "GET",
+		method: "POST",
 		body: JSON.stringify({
-			text: textAreaValue
+			text: formTextArea
 		})
 	});
 
@@ -66,7 +66,7 @@ formElement.addEventListener("submit", async (e) => {
 	feedbackCommentsWrapper.appendChild(commentElement);
 });
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async() => {
     const response = await fetch(`${API_URL}/feedbacks/${FEEDBACK_ID}`, { method: "POST" });
 
     if (!response.ok) return;
@@ -77,7 +77,7 @@ window.addEventListener("DOMContentLoaded", () => {
     pFeedbackDescription.textContent = feedback.description;
     spanFeedbackVotes.textContent = feedback.votes;
     spanCommentsLength.textContent = feedback.comments.lenght;
-    spanFeedbackChat.textContent = feedback.comments.length;
+    spanFeedbackChat.textContent = feedback.comments.lenght;
 
     displayComments(feedback.comments);
 });
